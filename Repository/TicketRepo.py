@@ -7,8 +7,8 @@ class TicketRepo:
 
     def add(self, ticket):
         """
-        Adds a new instance of a Rental object to the list
-        :param ticket: the instance of the Rental object to be added
+        Adds a new instance of a ticket object to the list
+        :param ticket: the instance of the ticket object to be added
         :return:
         """
         if self.find(ticket.ticket_id) != -1:
@@ -17,31 +17,31 @@ class TicketRepo:
 
     # def update(self, id, rented_date, returned_date):
     #     done = False
-    #     for rental in self._ticket_list:
-    #         if self.find(rental.rental_id) != -1 and rental.rental_id == id:
-    #             rental.rented_date = rented_date
-    #             rental.returned_date = returned_date
+    #     for ticket in self._ticket_list:
+    #         if self.find(ticket.ticket_id) != -1 and ticket.ticket_id == id:
+    #             ticket.rented_date = rented_date
+    #             ticket.returned_date = returned_date
     #             done = True
     #     if not done:
     #         raise Exception('The given id cannot be found!')
     #
     # def update_return(self, id, returned_date1):
     #     """
-    #     Updates the returned date of a returned book with the given id
+    #     Updates the returned date of a returned movie with the given id
     #     :param returned_date1:
-    #     :param id: the id of the given book to be returned
+    #     :param id: the id of the given movie to be returned
     #     :return:
     #     """
     #     done = False
     #     # returned_date1 = date.today()
-    #     for rental in self._ticket_list:
-    #         if self.find(rental.rental_id) != -1 and rental.rental_id == id:
-    #             if rental.returned_date == date(1, 1, 1):
-    #                 rental.returned_date = returned_date1
-    #                 return rental
+    #     for ticket in self._ticket_list:
+    #         if self.find(ticket.ticket_id) != -1 and ticket.ticket_id == id:
+    #             if ticket.returned_date == date(1, 1, 1):
+    #                 ticket.returned_date = returned_date1
+    #                 return ticket
     #             done = True
     #     if not done:
-    #         raise RentalRepoException('The book cannot be returned!')
+    #         raise ticketRepoException('The movie cannot be returned!')
 
     def delete(self, id):
         """
@@ -58,7 +58,7 @@ class TicketRepo:
         """
         Search for a ticket instance in the list with a matching given [id] attribute
         :param id: the ticket's id(unique positive integer)
-        :return: the index if the rental exist or -1 otherwise
+        :return: the index if the ticket exist or -1 otherwise
         """
         for i in range(len(self._ticket_list)):
             if self._ticket_list[i].ticket_id == id:

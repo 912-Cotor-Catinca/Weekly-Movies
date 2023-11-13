@@ -59,15 +59,15 @@ class MovieRepo:
                 return i
         return -1
 
-    # def find_movie(self, id):
-    #     """
-    #     Searches for a book in the list with a matching given [id] attribute
-    #     :param id: book' s id(unique string)
-    #     :return: the movie instance or raise Exception if the book is already rented
-    #     """
-    #     for b in self._movie_list:
-    #         if b.client_id == id:
-    #             return b
+    def find_movie(self, id):
+        """
+        Searches for a movie in the list with a matching given [id] attribute
+        :param id: movie' s id(unique string)
+        :return: the movie instance or raise Exception if the movie is already rented
+        """
+        for b in self._movie_list:
+            if b.client_id == id:
+                return b
 
     def get_all(self):
         return self._movie_list[:]

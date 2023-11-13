@@ -59,15 +59,15 @@ class ClientRepo:
                 return i
         return -1
 
-    # def find_client(self, id):
-    #     """
-    #     Searches for a client in the list with a matching given [id] attribute
-    #     :param id: client' s id(unique string)
-    #     :return: the client instance or raise Exception if the client is already rented
-    #     """
-    #     for b in self._client_list:
-    #         if b.client_id == id:
-    #             return b
+    def find_client(self, id):
+        """
+        Searches for a client in the list with a matching given [id] attribute
+        :param id: client' s id(unique string)
+        :return: the client instance or raise Exception if the client is already rented
+        """
+        for b in self._client_list:
+            if b.client_id == id:
+                return b
 
     def get_all(self):
         return self._client_list[:]

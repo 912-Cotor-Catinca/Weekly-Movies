@@ -77,3 +77,17 @@ class Ticket:
     def __str__(self):
         return self._ticket_id + ' ' + str(self._movie_id) + ' ' + str(self._client_id) + ' ' + str(self._price) + ' ' + str(
             self._row) + ' ' + str(self._seat_nr) + ' ' + self._day + ' ' + self._time + ' ' + self._location
+
+
+class TicketDTO:
+    def __init__(self, id_ticket, movie_id, client_id, price, day, time):
+        self.id_ticket = id_ticket
+        self._movie_id = movie_id
+        self._client_id = client_id
+        self._price = price
+        self._day = day
+        self._time = time
+
+    def __str__(self):
+        return str(self.id_ticket) + ' ' + str(self._movie_id) + ' ' + str(self._client_id) + ' ' + str(self._price) \
+               + ' ' + str(self._day) + ' ' + str(self._time)

@@ -8,7 +8,7 @@ class ScheduleRepo:
     def add(self, schedule):
         """
         Adds a new instance of a Schedule object to the list
-        :param schedule: the instance of the Rental object to be added
+        :param schedule: the instance of the ticket object to be added
         :return:
         """
         if self.find(schedule.schedule_id) != -1:
@@ -30,7 +30,7 @@ class ScheduleRepo:
         """
         Search for a schedule instance in the list with a matching given [id] attribute
         :param id: the schedule's id(unique positive integer)
-        :return: the index if the rental exist or -1 otherwise
+        :return: the index if the ticket exist or -1 otherwise
         """
         for i in range(len(self._schedule_list)):
             if self._schedule_list[i].ticket_id == id:
