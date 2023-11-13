@@ -55,7 +55,7 @@ class MovieRepo:
         :return: the index or -1 if there is no movie with the given id
         """
         for i in range(len(self._movie_list)):
-            if self._movie_list[i].client_id == id:
+            if self._movie_list[i].movie_id == id:
                 return i
         return -1
 
@@ -66,7 +66,7 @@ class MovieRepo:
         :return: the movie instance or raise Exception if the movie is already rented
         """
         for b in self._movie_list:
-            if b.client_id == id:
+            if b.movie_id == id:
                 return b
 
     def get_all(self):

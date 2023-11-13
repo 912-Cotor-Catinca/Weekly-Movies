@@ -78,6 +78,12 @@ class Ticket:
         return self._ticket_id + ' ' + str(self._movie_id) + ' ' + str(self._client_id) + ' ' + str(self._price) + ' ' + str(
             self._row) + ' ' + str(self._seat_nr) + ' ' + self._day + ' ' + self._time + ' ' + self._location
 
+    # def __len__(self):
+    #     if self._rented_date != date(1, 1, 1):
+    #         return (self._returned_date - self._rented_date).days + 1
+    #     today = date.today()
+    #     return (today - self._rented_date).days + 1
+
 
 class TicketDTO:
     def __init__(self, id_ticket, movie_id, client_id, price, day, time):
@@ -89,5 +95,5 @@ class TicketDTO:
         self._time = time
 
     def __str__(self):
-        return str(self.id_ticket) + ' ' + str(self._movie_id) + ' ' + str(self._client_id) + ' ' + str(self._price) \
-               + ' ' + str(self._day) + ' ' + str(self._time)
+        return str(self.id_ticket) + ' Movie: ' + str(self._movie_id) + ', Client: ' + str(self._client_id) + ', Price: ' + str(self._price) \
+               + ', Day: ' + str(self._day) + ', Time: ' + str(self._time)

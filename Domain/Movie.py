@@ -66,5 +66,4 @@ class Movie:
         return self._movie_id == other
 
     def __str__(self):
-        return str(self._movie_id) + ' ' + str(self._title) + ' ' + str(self._director) + ' ' + self._genre + ' ' + \
-            + self._language + ' ' + self._time + ' ' + self._location
+        return str(self._movie_id) + ' ' + str(self._title) + ' ' + str(self._director) + ' ' + str(self._genre) + ' ' + str(self._language) + ' ' + str(self._time) + ' ' + str(self._location)

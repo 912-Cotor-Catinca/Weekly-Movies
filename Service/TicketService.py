@@ -113,8 +113,8 @@ class TicketService:
         ticket_dtos = []
         for r in ticket:
             id_ticket = r.ticket_id
-            movie_id = r.movie_id
-            client_id = r.client_id
+            movie_id = r.movie_id.title
+            client_id = r.client_id.name
             price = r.price
             time = r.time
             day = r.day
@@ -167,8 +167,8 @@ class TicketService:
         for client in self._client_repo.get_all():
             count = 0
             for ticket in self._ticket_repo.get_all():
-                if client.client_id == ticket.client:
-                    count += len(ticket)
+                if client.client_id == ticket.client_id:
+                    count += 1
             days = self._create_client_count(client.client_id) * count
             dto = ClientTicketDTO(client, days)
             result.append(dto)
@@ -193,9 +193,9 @@ class TicketService:
         """
         result = []
         for ticket in self._ticket_repo.get_all():
-            if client is not None and ticket.client != client:
+            if client is not None and ticket.client_id != client:
                 continue
-            if movie is not None and ticket.get_movie != movie:
+            if movie is not None and ticket.movie_id != movie:
                 continue
             result.append(ticket)
         return result
