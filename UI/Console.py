@@ -59,24 +59,36 @@ class UI:
     def read_movie(self):
         movie_id = None
         title = None
-        author = None
+        director = None
+        genre = None
+        time = None
+        language = None
+        location = None
         try:
             movie_id = input('id: ')
             title = input('title: ')
-            author = input('author: ')
+            director = input('director: ')
+            genre = input('genre: ')
+            time = input('time: ')
+            language = input('language: ')
+            location = input('location: ')
         except ValueError:
             print('Invalid parameters')
-        return [movie_id, title, author]
+        return [movie_id, title, director, genre, time, language, location]
 
     def read_client(self):
         client_id = None
         name = None
+        email = None
+        phone = None
         try:
-            client_id = int(input('id: '))
+            client_id = input('id: ')
             name = input('name: ')
+            email = input('email: ')
+            phone = input('phone: ')
         except ValueError:
             print('Invalid Parameters!')
-        return [client_id, name]
+        return [client_id, name, email, phone]
 
     def read_ticket(self):
         ticket_id = None
@@ -116,7 +128,7 @@ class UI:
         done = False
         while not done:
             b = self.read_movie()
-            movie = self._srvMovie.add_movie(b[0], b[1], b[2])
+            movie = self._srvMovie.add_movie(b[0], b[1], b[2], b[3], b[4], b[5], b[6])
             return movie
             cmd = input()
             if cmd == 's' or cmd == 'S':
