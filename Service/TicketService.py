@@ -167,9 +167,9 @@ class TicketService:
         for client in self._client_repo.get_all():
             count = 0
             for ticket in self._ticket_repo.get_all():
-                if client.client_id == ticket.client_id:
+                if client.client_id == ticket.client_id.client_id:
                     count += 1
-            days = self._create_client_count(client.client_id) * count
+            days = count
             dto = ClientTicketDTO(client, days)
             result.append(dto)
 

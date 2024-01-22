@@ -25,21 +25,21 @@ class UI:
     @staticmethod
     def print_menu():
         print('\t Movie tickets Register')
-        print('\033[4m' + "movie Data:" + '\033[m')
+        print('\033[4m' + "Movie Data:" + '\033[m')
         print('\t To add a new movie use ''add_movie'' command')
         print('\t To list all movies use list_movies command')
         print('\t To delete a movie use ''delete_movie'' command')
         print('\t To update a movie parameters use ''update_movie'' command')
         print('\t To search by id movie use ''search_by_movie_id'' command')
         print('\t To search by title use ''search_by_title'' command')
-        print('\t To search by author use ''search_by_author'' command')
+        print('\t To search by author use ''search_by_director'' command')
         print('\033[4m' + "Client Data:" + '\033[m')
         print('\t To add a new client use ''add_client'' command')
         print('\t To list all client use ''list_clients'' command')
         print('\t To delete a client use ''delete_movie'' command')
         print('\t To update a client parameters use ''update_movie'' command')
         print('\t To search by id client use ''search_by_client_id'' command')
-        print('\t To search by name use ''search_by_name'' command')
+        print('\t To search by name use ''search_by_client_name'' command')
         print('\033[4m' + "Ticket Data:" + '\033[m')
         print('\t To list all tickets use ''list_tickets'' command')
         print('\t To add a new client use ''add_client'' command')
@@ -92,19 +92,25 @@ class UI:
 
     def read_ticket(self):
         ticket_id = None
-        ticket_date = None
         movie_id = None
         client_id = None
-        returned_date = None
+        price = None
+        row = None
+        seat_nr = None
+        time = None
+        day = None
         try:
             ticket_id = int(input('id_ticket: '))
             movie_id = input('id_movie: ')
             client_id = int(input('id_client: '))
-            ticket_date = datetime.date.today()
-            returned_date = datetime.date(1, 1, 1)
+            price = int(input('id_client: '))
+            row = int(input('id_client: '))
+            seat_nr = int(input('id_client: '))
+            time = input('id_client: ')
+            day = input('id_client: ')
         except ValueError:
             print('Invalid Parameters!')
-        return [ticket_id, movie_id, client_id, ticket_date, returned_date]
+        return [ticket_id, movie_id, client_id, price, row, seat_nr, time, day]
 
     def start_uit(self):
         self.print_menu()
@@ -150,15 +156,9 @@ class UI:
             self._srvTicket.delete_movie_tickets(movie_id)
 
     def _add_client_ui(self, params):
-        done = False
-        while not done:
-            c = self.read_client()
-            client = self._srvClient.add_client(c[0], c[1])
-
-            cmd = input()
-            if cmd == 's' or cmd == 'S':
-                done = True
-            return client
+        c = self.read_client()
+        client = self._srvClient.add_client(c[0], c[1], c[2], c[3])
+        return client
 
     def _display_tickets(self, params):
         ticket = self._srvTicket.display()
@@ -191,12 +191,10 @@ class UI:
             print('The given id was not found')
 
     def _rent_movie(self, params):
-        r = self.read_ticket()
-        if self._srvTicket.check_if_rent(r[1], r[4]):
-            rent = self._srvTicket.add_ticket(r[0], r[1], r[2], r[3], r[4])
-            return rent
-        else:
-            print('The movie cannot be rented')
+        pass
+        # r = self.read_ticket()
+        # rent = self._srvTicket.add_ticket(r[0], r[1], r[2], r[3], r[4])
+
 
     def _update_client(self, params):
         id = int(input('id: '))
@@ -281,7 +279,7 @@ class UI:
                 print(movie)
 
     def _statistic3(self, params):
-        print("Most active clients. The list of clients sorted in descending order by the number of movie ticket days "
+        print("Most active clients. The list of clients sorted in descending order by the number of movie tickets "
               "they have ")
         data = self._srvTicket.most_cinephile_clients()
         if len(data) == 0:
