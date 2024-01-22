@@ -1,14 +1,12 @@
 
 class Movie:
-    def __init__(self, movie_id='', title='', director='', genre='', time='', language='', location=''):
-
+    def __init__(self, movie_id=0, title='', director='', genre='', duration='', cinema_id=0):
         self._movie_id = movie_id
         self._title = title
         self._director = director
         self._genre = genre
-        self._time = time
-        self._language = language
-        self._location = location
+        self._duration = duration
+        self._cinema_id = cinema_id
 
     @property
     def movie_id(self):
@@ -28,15 +26,7 @@ class Movie:
 
     @property
     def time(self):
-        return self._time
-
-    @property
-    def language(self):
-        return self._language
-
-    @property
-    def location(self):
-        return self._location
+        return self._duration
 
     @title.setter
     def title(self, other):
@@ -52,18 +42,10 @@ class Movie:
 
     @time.setter
     def time(self, other):
-        self._time = other
-
-    @language.setter
-    def language(self, other):
-        self._language = other
-
-    @location.setter
-    def location(self, other):
-        self._location = other
+        self._duration = other
 
     def __eq__(self, other):
         return self._movie_id == other
 
     def __str__(self):
-        return str(self._movie_id) + ' ' + str(self._title) + ' ' + str(self._director) + ' ' + str(self._genre) + ' ' + str(self._language) + ' ' + str(self._time) + ' ' + str(self._location)
+        return str(self._movie_id) + ' ' + str(self._cinema_id) + ' ' + str(self._title) + ' ' + str(self._director) + ' ' + str(self._genre) + ' ' + str(self._language) + ' ' + str(self._duration) + ' ' + str(self._location)

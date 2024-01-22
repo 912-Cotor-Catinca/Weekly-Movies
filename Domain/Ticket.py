@@ -1,15 +1,12 @@
 class Ticket:
-    def __init__(self, ticket_id='', movie_id='', client_id='', price=0, row=0, seat_nr=0, time='', day='',
+    def __init__(self, ticket_id=0, movie_id=0, client_id=0, cinema_id=0, price=0, row=0, seat_nr=0, time='', day='',
                  location=''):
         self._ticket_id = ticket_id
         self._movie_id = movie_id
         self._client_id = client_id
-        self._price = price
+        self._cinema_id = cinema_id
         self._row = row
         self._seat_nr = seat_nr
-        self._time = time
-        self._day = day
-        self._location = location
 
     @property
     def ticket_id(self):

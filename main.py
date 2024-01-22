@@ -15,3 +15,4 @@ if __name__ == '__main__':
     srvClient = ClientService(repoClient)
     cons = UI(srvMovie, srvClient, srvTicket)
     cons.start_uit()
+

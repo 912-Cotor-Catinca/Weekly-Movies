@@ -1,11 +1,11 @@
 class Schedule:
-    def __init__(self, schedule_id='', movie_id='', start_time='', available_seats=0, day='', location=''):
+    def __init__(self, schedule_id=0, movie_id=0, start_time='', day='', cinema_id=0, price=0):
         self._schedule_id = schedule_id
         self._movie_id = movie_id
         self._start_time = start_time
-        self._available_seats = available_seats
         self._day = day
-        self._location = location
+        self._cinema_id = cinema_id
+        self._price = price
 
     @property
     def schedule_id(self):
@@ -20,36 +20,27 @@ class Schedule:
         return self._start_time
 
     @property
-    def available_seats(self):
-        return self._available_seats
-
-    @property
-    def location(self):
-        return self._location
-
-    @property
     def day(self):
         return self._day
+
+    @property
+    def price(self):
+        return self._price
 
     @start_time.setter
     def start_time(self, other):
         self._start_time = other
 
-    @available_seats.setter
-    def available_seats(self, other):
-        self._available_seats = other
-
-    @location.setter
-    def location(self, other):
-        self._location = other
-
     @day.setter
     def day(self, other):
         self._day = other
+
+    @price.setter
+    def price(self, other):
+        self._price=other
 
     def __eq__(self, other):
         return self._movie_id == other
 
     def __str__(self):
-        return self._schedule_id + ' ' + str(self._movie_id) + ' ' + str(self._start_time) + ' ' + str(
-            self._available_seats) + ' ' + self._day + '' + self._location
+        return str(self._schedule_id) + ' ' + str(self._movie_id) + ' ' + str(self._cinema_id) + ' ' + str(self._start_time) + ' ' + self._day
