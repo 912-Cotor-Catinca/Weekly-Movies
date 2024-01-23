@@ -7,12 +7,13 @@ from Service.TicketService import TicketService
 from UI.Console import UI
 
 if __name__ == '__main__':
-    repoMovie = MovieRepo()
-    repoClient = ClientRepo()
-    repoTicket = TicketRepo()
-    srvTicket = TicketService(repoTicket, repoMovie, repoClient)
-    srvMovie = MovieService(repoMovie)
-    srvClient = ClientService(repoClient)
-    cons = UI(srvMovie, srvClient, srvTicket)
-    cons.start_uit()
+    pass
+    # repoMovie = MovieRepo()
+    # repoClient = ClientRepo()
+    # repoTicket = TicketRepo()
+    # srvTicket = TicketService(repoTicket, repoMovie, repoClient)
+    # srvMovie = MovieService(repoMovie)
+    # srvClient = ClientService(repoClient)
+    # cons = UI(srvMovie, srvClient, srvTicket)
+    # cons.start_uit()
 
