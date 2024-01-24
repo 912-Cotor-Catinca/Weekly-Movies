@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Time, Date
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Time, Date, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -19,7 +19,7 @@ class MovieModel(Base):
     cinemaid = Column(Integer, ForeignKey('cinema.cinemaid'))
     title = Column(String(255))
     director = Column(String(255))
-    genre = Column(String(255))
+    genre = Column(String)
     duration = Column(Integer)
     cinema = relationship("CinemaModel", back_populates="movie")
 

@@ -8,21 +8,18 @@ class ClientService:
     def get_all_clients(self):
         return self._client_repo.get_clients()
 
-    # def add_client(self, client_id, name, email, phone):
-    #     """
-    #     Instantiates a Client object with a given [client_movie], a[name] and adds it to the repo
-    #     :param phone: Client's phone
-    #     :param email: Client's email
-    #     :param client_id: The Client's id
-    #     :param name: Client's title
-    #     :return:
-    #     """
-    #     client = Client(client_id, name, email, phone)
-    #     if self.find(client.client_id) != -1:
-    #         raise ValueError('Client already exists!')
-    #     else:
-    #         self._client_repo.add(client)
-    #     return client
+    def add_client(self, name, email, phone):
+        """
+        Instantiates a Client object with a given [client_movie], a[name] and adds it to the repo
+        :param phone: Client's phone
+        :param email: Client's email
+        :param client_id: The Client's id
+        :param name: Client's title
+        :return:
+        """
+
+        return self._client_repo.create_client(name, email, phone)
+
     #
     # def update_client(self, id, name):
     #     """
@@ -79,3 +76,4 @@ class ClientService:
     #         if id.lower() in client.lower():
     #             result.append(c)
     #     return result
+
