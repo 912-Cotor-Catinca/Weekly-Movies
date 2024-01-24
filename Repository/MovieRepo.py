@@ -1,9 +1,13 @@
 from sqlalchemy.orm import Session
+from Models.models import MovieModel
 
 class MovieRepo:
     def __init__(self, db_session):
         # self._movie_list = []
         self.db_session = db_session
+
+    def get_movies(self):
+        return self.db_session.query(MovieModel).all()
 
     # @property
     # def movie_list(self):
@@ -78,5 +82,3 @@ class MovieRepo:
     # def __getitem__(self, item):
     #     return self._movie_list[item]
 
-    def get_movies(self):
-        return self.db_session.query(MovieModel).all()

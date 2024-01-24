@@ -3,6 +3,7 @@ Implement the movie service
 """
 from Domain.Movie import Movie
 
+
 class MovieService:
     def __init__(self, movie_repo):
         self._movie_repo = movie_repo
@@ -94,4 +95,3 @@ class MovieService:
     #         if movie_id.lower() in b.movie_id.lower():
     #             result.append(b)
     #     return result
-

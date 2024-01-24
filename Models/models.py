@@ -1,8 +1,9 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Time, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
+
 
 class CinemaModel(Base):
     __tablename__ = 'cinema'
@@ -15,7 +16,7 @@ class CinemaModel(Base):
 class MovieModel(Base):
     __tablename__ = 'movie'
     movieid = Column(Integer, primary_key=True)
-    movie_id = Column(Integer, ForeignKey('cinema.cinemaid'))
+    cinemaid = Column(Integer, ForeignKey('cinema.cinemaid'))
     title = Column(String(255))
     director = Column(String(255))
     genre = Column(String(255))
@@ -26,11 +27,11 @@ class MovieModel(Base):
 class ScheduleModel(Base):
     __tablename__ = 'schedule'
     scheduleid = Column(Integer, primary_key=True)
-    day = Column(DateTime)
-    starttime = Column(DateTime)
+    day = Column(Date)
+    starttime = Column(Time)
     price = Column(Integer)
     cinemaid = Column(Integer, ForeignKey('cinema.cinemaid'))
-    moviedid = Column(Integer, ForeignKey('movie.movieid'))
+    movieid = Column(Integer, ForeignKey('movie.movieid'))
 
     cinema = relationship("CinemaModel", back_populates="schedule")
     movie = relationship("MovieModel", back_populates="schedule")
