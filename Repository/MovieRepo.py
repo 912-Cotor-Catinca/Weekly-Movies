@@ -1,9 +1,11 @@
 from sqlalchemy.orm import Session
 from Models.models import MovieModel
 
+from Models.models import MovieModel
+
+
 class MovieRepo:
     def __init__(self, db_session):
-        # self._movie_list = []
         self.db_session = db_session
 
     def get_movies(self):

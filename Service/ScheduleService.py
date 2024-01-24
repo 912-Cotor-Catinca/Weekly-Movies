@@ -1,3 +1,5 @@
+class ScheduleService:
+    pass
 
 class ScheduleService:
     def __init__(self, schedule_repo):

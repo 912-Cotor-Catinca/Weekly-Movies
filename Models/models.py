@@ -49,7 +49,7 @@ class TicketsModel(Base):
     __tablename__ = 'tickets'
     ticketid = Column(Integer, primary_key=True)
     cinemaid = Column(Integer, ForeignKey('cinema.cinemaid'))
-    moviedid = Column(Integer, ForeignKey('movie.movieid'))
+    movieid = Column(Integer, ForeignKey('movie.movieid'))
     clientid = Column(Integer, ForeignKey('client.clientid'))
     row = Column(Integer)
     seat_nr = Column(Integer)
