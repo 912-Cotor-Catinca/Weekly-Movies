@@ -1,9 +1,8 @@
-from flask import Flask
+from flask import Flask, request
 from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from Models.models import Base, MovieModel
-from Repository.MovieRepo import MovieRepo
+from Models.models import Base, MovieModel, TicketsModel
 from Repository.CinemaRepo import CinemaRepo
 from Repository.MovieRepo import MovieRepo
 from Repository.ClientRepo import ClientRepo
@@ -12,7 +11,6 @@ from Repository.ScheduleRepo import ScheduleRepo
 from Service.MovieService import MovieService
 from Service.CinemaService import CinemaService
 from Service.ClientService import ClientService
-from Service.TicketService import TicketService
 from Service.ScheduleService import ScheduleService
 from Service.TicketService import TicketService
 from Statistics import DatabaseStatistics
@@ -32,9 +30,9 @@ app = Flask(__name__)
 db_params = {
     'host': 'localhost',
     'port': '5432',
-    'database': 'cinema',
+    'database': 'CT',
     'user': 'postgres',
-    'password': 'parola'
+    'password': 'password'
 }
 # for creating connection string
 # Create a SQLAlchemy engine to connect to the database
@@ -122,6 +120,38 @@ def get_movies_by_genre(genre):
     )
     return response
 
+
+@app.route("/client", methods=["POST"])
+def create_client():
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    phone = data.get("phone")
+    if not name or not email or not phone:
+        return jsonify({"error": "Missing required fields"}), 400
+    try:
+        new_client = client_service.add_client(name, email, phone)
+        return jsonify({"clientid": new_client.clientid}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/ticket", methods=["POST"])
+def add_ticket():
+    data = request.get_json()
+    cinemaid = data.get("cinemaid")
+    movieid = data.get("movieid")
+    clientid = data.get("clientid")
+    row = data.get("row")
+    column = data.get("column")
+    if not cinemaid or not movieid or not clientid or not row or not column:
+        return jsonify({"error": "Missing required fields"}), 400
+    try:
+        new_ticket = TicketsModel(cinemaid, movieid, clientid, row, column)
+        ticket_service.add_ticket(new_ticket)
+        return jsonify({"ticketid": new_ticket.ticketid}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 db_stats = DatabaseStatistics(db_params, engine)
