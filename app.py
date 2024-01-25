@@ -30,9 +30,9 @@ app = Flask(__name__)
 db_params = {
     'host': 'localhost',
     'port': '5432',
-    'database': 'CT',
+    'database': 'cinema',
     'user': 'postgres',
-    'password': 'password'
+    'password': 'parola'
 }
 # for creating connection string
 # Create a SQLAlchemy engine to connect to the database
@@ -108,6 +108,70 @@ def get_movies_by_cinema(cid):
     return response
 
 
+@app.route("/schedule/<cid>", methods=["GET"])
+def get_schedules_by_cinema(cid):
+    schedules = schedule_service.get_schedule_by_cinema(cid)
+    schedule_list = [
+        {
+            "id": schedule.scheduleid,
+            "day": json.dumps(schedule.day, default=serialize_datetime),
+            "starttime": json.dumps(schedule.starttime, default=serialize_datetime),
+            "price": schedule.price,
+            "cinema": schedule.cinema.name,
+            "movie": schedule.movie.title
+        } for schedule in schedules]
+    response_data = json.dumps(schedule_list, ensure_ascii=False)
+    response = app.response_class(
+        response=response_data,
+        status=200,
+        mimetype='application/json; charset=utf-8'
+    )
+    return response
+
+
+@app.route("/schedule/genre/<genre>", methods=["GET"])
+def get_schedules_by_genre(genre):
+    schedules = schedule_service.get_schedule_by_genre(genre)
+    schedule_list = [
+        {
+            "id": schedule.scheduleid,
+            "day": json.dumps(schedule.day, default=serialize_datetime),
+            "starttime": json.dumps(schedule.starttime, default=serialize_datetime),
+            "price": schedule.price,
+            "cinema": schedule.cinema.name,
+            "movie": schedule.movie.title
+        } for schedule in schedules]
+    response_data = json.dumps(schedule_list, ensure_ascii=False)
+    response = app.response_class(
+        response=response_data,
+        status=200,
+        mimetype='application/json; charset=utf-8'
+    )
+    return response
+
+
+
+@app.route("/schedule/genre/<genre>/<cid>", methods=["GET"])
+def get_schedules_by_genre_and_cinema(genre, cid):
+    schedules = schedule_service.filter_by_genre_and_cinema(genre, cid)
+    schedule_list = [
+        {
+            "id": schedule.scheduleid,
+            "day": json.dumps(schedule.day, default=serialize_datetime),
+            "starttime": json.dumps(schedule.starttime, default=serialize_datetime),
+            "price": schedule.price,
+            "cinema": schedule.cinema.name,
+            "movie": schedule.movie.title
+        } for schedule in schedules]
+    response_data = json.dumps(schedule_list, ensure_ascii=False)
+    response = app.response_class(
+        response=response_data,
+        status=200,
+        mimetype='application/json; charset=utf-8'
+    )
+    return response
+
+
 @app.route("/movies/genre/<genre>", methods=["GET"])
 def get_movies_by_genre(genre):
     movies = movie_service.get_movies_by_genre(genre)
@@ -161,13 +225,14 @@ def get_statistics():
     statistics = db_stats.most_wanted_movie()
     return jsonify(statistics)
 
+
 @app.route('/most_wanted_cinema', methods=['GET'])
-def get_statistics():
+def get_statistics1():
     statistics = db_stats.most_wanted_cinema()
     return jsonify(statistics)
 
 @app.route('/get_statistics/<table_name>', methods=['GET'])
-def get_statistics(table_name):
+def get_statistics2(table_name):
     statistics = db_stats.get_table_statistics(table_name)
     return jsonify(statistics)
 

@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class DatabaseStatistics:
     def __init__(self, db_params, engine):
         self.db_params = db_params
