@@ -155,7 +155,16 @@ def add_ticket():
 
 
 db_stats = DatabaseStatistics(db_params, engine)
-tables_to_analyze = ['Client', 'Cinema', 'Movie', 'Schedule', 'Tickets']
+
+@app.route('/most_wanted_movie', methods=['GET'])
+def get_statistics():
+    statistics = db_stats.most_wanted_movie()
+    return jsonify(statistics)
+
+@app.route('/most_wanted_cinema', methods=['GET'])
+def get_statistics():
+    statistics = db_stats.most_wanted_cinema()
+    return jsonify(statistics)
 
 @app.route('/get_statistics/<table_name>', methods=['GET'])
 def get_statistics(table_name):

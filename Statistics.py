@@ -30,3 +30,17 @@ class DatabaseStatistics:
             return statistics_dict
         else:
             print(f"\n{table_name} Table is empty.")
+
+    def most_wanted_movie(self):
+        query = "SELECT * FROM tickets;"
+        tickets_df = self.execute_query(query)
+        most_wanted_movie_id = tickets_df['movieid'].value_counts().idxmax()
+        return most_wanted_movie_id
+
+    def most_wanted_cinema(self):
+        query = "SELECT * FROM tickets;"
+        tickets_df = self.execute_query(query)
+        most_wanted_cinema_id = tickets_df['cinemaid'].value_counts().idxmax()
+        return most_wanted_cinema_id
+
+
