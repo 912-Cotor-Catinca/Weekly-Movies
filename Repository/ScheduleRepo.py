@@ -28,3 +28,6 @@ class ScheduleRepo:
                 .filter(ScheduleModel.cinemaid == cinemaid)
                 .all()
         )
+
+    def get_schedules_by_schedule(self, sid):
+        return self.db_session.query(ScheduleModel).filter(ScheduleModel.scheduleid == sid)

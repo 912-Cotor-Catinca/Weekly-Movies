@@ -1,7 +1,4 @@
 class ScheduleService:
-    pass
-
-class ScheduleService:
     def __init__(self, schedule_repo):
         self._schedule_repo = schedule_repo
 
@@ -16,4 +13,7 @@ class ScheduleService:
 
     def filter_by_genre_and_cinema(self, genre, cinemaid):
         return self._schedule_repo.filter_by_genre_and_cinema(genre, cinemaid)
+
+    def get_schedule_by_schedule(self, sid):
+        return self._schedule_repo.get_schedules_by_schedule(sid)
 

@@ -129,6 +129,27 @@ def get_schedules_by_cinema(cid):
     return response
 
 
+@app.route("/schedule/id/<sid>", methods=["GET"])
+def get_schedules_by_schedule(sid):
+    schedules = schedule_service.get_schedule_by_schedule(sid)
+    schedule_list = [
+        {
+            "id": schedule.scheduleid,
+            "day": json.dumps(schedule.day, default=serialize_datetime),
+            "starttime": json.dumps(schedule.starttime, default=serialize_datetime),
+            "price": schedule.price,
+            "cinema": schedule.cinema.name,
+            "movie": schedule.movie.title
+        } for schedule in schedules]
+    response_data = json.dumps(schedule_list, ensure_ascii=False)
+    response = app.response_class(
+        response=response_data,
+        status=200,
+        mimetype='application/json; charset=utf-8'
+    )
+    return response
+
+
 @app.route("/schedule/genre/<genre>", methods=["GET"])
 def get_schedules_by_genre(genre):
     schedules = schedule_service.get_schedule_by_genre(genre)
@@ -148,7 +169,6 @@ def get_schedules_by_genre(genre):
         mimetype='application/json; charset=utf-8'
     )
     return response
-
 
 
 @app.route("/schedule/genre/<genre>/<cid>", methods=["GET"])
